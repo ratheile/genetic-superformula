@@ -1,4 +1,4 @@
-
+(* ::Package:: *)
 
 BezierPhenotype[bin_, numCurves_, dimensions_, bezierOrder_, 
   resolution_ , imgSpace_] := 
@@ -13,3 +13,11 @@ BezierPhenotype[bin_, numCurves_, dimensions_, bezierOrder_,
   
   
   
+
+
+GielisPhenotype[bin_, resolution_, ranges_] :=  Module[{frac, params, scaledParams},
+  frac = Map[FromDigits[#, 2]/(2^resolution) &, 
+    Partition[bin, resolution]];
+  scaledParams = N[Table[Rescale[frac[[i]], {0,1},ranges[[i]]],{i,1,7}]];
+  Return[scaledParams]
+]
